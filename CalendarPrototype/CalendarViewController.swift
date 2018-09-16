@@ -34,11 +34,7 @@ class CalendarViewController: UIViewController {
     super.viewDidLoad()
     
     calendar.locale = locale
-    calendar.allowsMultipleSelection = true
-    calendar.appearance.titleDefaultColor = .black
-    calendar.appearance.titleTodayColor = .yellow
-    calendar.appearance.titlePlaceholderColor = .lightGray
-    calendar.appearance.titleWeekendColor = .red
+    calendar.today = nil
   }
   
 }
@@ -53,6 +49,10 @@ extension CalendarViewController: FSCalendarDataSource, FSCalendarDelegate, FSCa
     return false
   }
   
+  func calendar(_ calendar: FSCalendar, shouldSelect date: Date, at monthPosition: FSCalendarMonthPosition) -> Bool {
+    return !date.hasPassed
+  }
+  
   func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
     guard let pivot = pivotDate else {
       pivotDate = date
@@ -63,14 +63,10 @@ extension CalendarViewController: FSCalendarDataSource, FSCalendarDelegate, FSCa
     pivotDate = nil
   }
   
-  // MARK:- FSCalendarDelegateAppearance
-  
-  /// !!! Function is supposed to set titleDefaultColor only, but it's also setting titleTodayColor, titlePlaceholderColor and titleWeekendColor !!!
-  func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, titleDefaultColorFor date: Date) -> UIColor? {
-    if date > Date() && date < Date().tomorrow.tomorrow.tomorrow {
-      return .green
+  func calendar(_ calendar: FSCalendar, willDisplay cell: FSCalendarCell, for date: Date, at monthPosition: FSCalendarMonthPosition) {
+    if date.hasPassed {
+      cell.titleLabel.textColor = UIColor.black.withAlphaComponent(0.05)
     }
-    return appearance.titleDefaultColor
   }
   
 }
