@@ -9,8 +9,22 @@
 import UIKit
 
 class ViewController: UIViewController {
-  override func viewDidAppear(_ animated: Bool) {
-    super.viewDidAppear(animated)
-    show(CalendarViewController(locale: Locale.current), sender: nil)
+  
+  @IBOutlet weak var startDateLabel: UILabel!
+  @IBOutlet weak var endDateLabel: UILabel!
+  
+  @IBAction func pickRangeButtonTapped(_ sender: UIButton) {
+    let calendarVC = CalendarViewController(locale: Locale.current)
+    calendarVC.delegate = self
+    present(calendarVC, animated: true, completion: nil)
+  }
+}
+
+extension ViewController: DateRangePickerDelegate {
+  func didSelect(dateRange: (start: Date, end: Date)) {
+    let dateFormat: DateFormatter = DateFormatter()
+    dateFormat.dateFormat = "dd MMMM yyyy"
+    startDateLabel.text = dateFormat.string(from: dateRange.start)
+    endDateLabel.text = dateFormat.string(from: dateRange.end)
   }
 }

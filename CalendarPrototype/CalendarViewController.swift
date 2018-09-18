@@ -9,6 +9,10 @@
 import UIKit
 import FSCalendar
 
+protocol DateRangePickerDelegate {
+  func didSelect(dateRange: (start: Date, end: Date))
+}
+
 class CalendarViewController: UIViewController {
   
   @IBOutlet weak var calendar: FSCalendar!
@@ -17,6 +21,7 @@ class CalendarViewController: UIViewController {
   
   private let locale: Locale
   private var pivotDate: Date?
+  var delegate: DateRangePickerDelegate?
   
   init(locale: Locale) {
     self.locale = locale
@@ -35,6 +40,14 @@ class CalendarViewController: UIViewController {
     
     calendar.locale = locale
     calendar.today = nil
+  }
+  
+  @IBAction func readyButtonTapped(_ sender: UIButton) {
+    if let startDate = calendar.selectedDates.first,
+      let endDate = calendar.selectedDates.last {
+      delegate?.didSelect(dateRange: (startDate, endDate))
+    }
+    dismiss(animated: true, completion: nil)
   }
   
 }

@@ -22,7 +22,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XTa-sU-TPi" customClass="FSCalendar">
-                    <rect key="frame" x="0.0" y="20" width="320" height="460"/>
+                    <rect key="frame" x="0.0" y="20" width="320" height="410"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="color" keyPath="titleWeekendColor">
@@ -47,15 +47,29 @@
                         <outlet property="delegate" destination="-1" id="70K-be-qNQ"/>
                     </connections>
                 </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MXH-Md-9Wo">
+                    <rect key="frame" x="0.0" y="430" width="320" height="50"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="WbI-1M-LUt"/>
+                    </constraints>
+                    <state key="normal" title="READY"/>
+                    <connections>
+                        <action selector="readyButtonTapped:" destination="-1" eventType="touchUpInside" id="fK5-c5-Kie"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
+                <constraint firstItem="MXH-Md-9Wo" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="1fJ-I9-eKg"/>
                 <constraint firstItem="XTa-sU-TPi" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="5Jm-6D-QUN"/>
                 <constraint firstItem="XTa-sU-TPi" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="861-aB-Fdl"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="XTa-sU-TPi" secondAttribute="bottom" id="L6E-Ap-a0r"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="MXH-Md-9Wo" secondAttribute="bottom" id="9pT-WH-4OW"/>
+                <constraint firstItem="MXH-Md-9Wo" firstAttribute="top" secondItem="XTa-sU-TPi" secondAttribute="bottom" id="Pmf-6t-qyA"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="MXH-Md-9Wo" secondAttribute="trailing" id="TCa-Ow-fZK"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="XTa-sU-TPi" secondAttribute="trailing" id="Vyp-dK-e95"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <point key="canvasLocation" x="138.75" y="155"/>
         </view>
     </objects>
 </document>
